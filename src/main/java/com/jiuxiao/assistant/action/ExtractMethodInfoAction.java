@@ -44,6 +44,8 @@ public class ExtractMethodInfoAction extends AnAction {
         // 将最终转换JSON字符串复制到剪切板
         String requestBody = JsonGenerator.generateRequestBody(methodInfo);
         SystemHandleUtil.copyToClipboard(requestBody);
-        SystemHandleUtil.showMessage("JSON对象已复制到剪切板\nJSON string has been copied to the clipboard");
+        SystemHandleUtil.showStatusBarTip(
+                e.getProject(), "JSON对象已复制到剪切板"
+        );
     }
 }

@@ -30,7 +30,9 @@
     <!-- 其他默认信息 -->
     <depends>com.intellij.modules.platform</depends>
     <depends>com.intellij.java</depends>
+    
     <extensions defaultExtensionNs="com.intellij">
+        <notificationGroup displayType="BALLOON" id="DevAssistant.NotificationGroup"/>
     </extensions>
 
 </idea-plugin>
