@@ -19,8 +19,14 @@ import java.util.TimerTask;
  */
 public class SystemHandleUtil {
 
+    /**
+     * 系统通知组ID
+     */
     private static final String NOTIFICATION_GROUP_ID = "DevAssistant.NotificationGroup";
 
+    /**
+     * 通知显示时间，单位ms
+     */
     private static final Long STATUS_BAR_TIP_SECONDS = 3500L;
 
     /**

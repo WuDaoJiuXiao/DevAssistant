@@ -4,7 +4,7 @@ import com.intellij.openapi.actionSystem.ActionUpdateThread;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.psi.PsiMethod;
-import com.jiuxiao.assistant.dto.MethodInfo;
+import com.jiuxiao.assistant.dto.extract.MethodInfo;
 import com.jiuxiao.assistant.generator.JsonGenerator;
 import com.jiuxiao.assistant.resolver.MethodInfoResolver;
 import com.jiuxiao.assistant.util.CommonUtil;
@@ -42,7 +42,7 @@ public class ExtractMethodInfoAction extends AnAction {
         }
 
         // 将最终转换JSON字符串复制到剪切板
-        String requestBody = JsonGenerator.generateRequestBody(methodInfo);
+        String requestBody = JsonGenerator.generateRequestBody(methodInfo, true);
         SystemHandleUtil.copyToClipboard(requestBody);
         SystemHandleUtil.showStatusBarTip(
                 e.getProject(), "JSON对象已复制到剪切板"

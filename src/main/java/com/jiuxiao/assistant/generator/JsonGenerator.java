@@ -1,14 +1,16 @@
 package com.jiuxiao.assistant.generator;
 
 import com.alibaba.fastjson2.JSON;
-import com.jiuxiao.assistant.dto.FieldInfo;
-import com.jiuxiao.assistant.dto.MethodInfo;
-import com.jiuxiao.assistant.dto.MethodParamInfo;
-import com.jiuxiao.assistant.dto.TypeInfo;
+import com.jiuxiao.assistant.dto.extract.FieldInfo;
+import com.jiuxiao.assistant.dto.extract.MethodInfo;
+import com.jiuxiao.assistant.dto.extract.MethodParamInfo;
+import com.jiuxiao.assistant.dto.extract.TypeInfo;
 import com.jiuxiao.assistant.enums.BasicTypeEnum;
 import com.jiuxiao.assistant.enums.FieldTypeEnum;
+import com.jiuxiao.assistant.util.ClassUtil;
 import org.apache.commons.lang3.StringUtils;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -20,15 +22,11 @@ public class JsonGenerator {
 
     private static final int MIN_MAP_NUM = 2;
 
-    private static final double DOUBLE_DEFAULT_VALUE = 0.0;
-
     private static final String KEY_STRING = "key";
 
     private static final String DEFAULT_KEY_STRING = "defaultKey";
 
     private static final String BIG_DECIMAL_STRING = "java.math.BigDecimal";
-
-    private static final String EMPTY_STRING = "";
 
     private static final String DATE_FORMATTER = "yyyy-MM-dd HH:mm:ss";
 
@@ -58,12 +56,14 @@ public class JsonGenerator {
      * 将方法信息对象转为JSON请求体
      *
      * @param methodInfo 方法信息对象
+     * @param isDefault  是否设置默认值(true:所有对象的值为类型的默认值 / false:所有对象的值为随机有效值)
      * @return JSON字符对象
      */
-    public static String generateRequestBody(MethodInfo methodInfo) {
+    public static String generateRequestBody(MethodInfo methodInfo, boolean isDefault) {
         Map<String, Object> rootMap = new LinkedHashMap<>();
+        Set<String> nestedTypes = new HashSet<>();
         for (MethodParamInfo parameter : methodInfo.getParameters()) {
-            rootMap.put(parameter.getParamName(), buildValue(parameter.getParamType()));
+            rootMap.put(parameter.getParamName(), buildValue(parameter.getParamType(), isDefault, nestedTypes));
         }
         return JSON.toJSONString(rootMap);
     }
@@ -71,10 +71,12 @@ public class JsonGenerator {
     /**
      * 根据不同类型映射对应的转换器
      *
-     * @param typeInfo 类型信息
+     * @param typeInfo    类型信息
+     * @param isDefault   是否设置默认值(true:所有对象的值为类型的默认值 / false:所有对象的值为随机有效值)
+     * @param nestedTypes 嵌套类型路径集合
      * @return 转换后的对象
      */
-    private static Object buildValue(TypeInfo typeInfo) {
+    private static Object buildValue(TypeInfo typeInfo, boolean isDefault, Set<String> nestedTypes) {
         String category = typeInfo.getCategory();
         FieldTypeEnum typeEnum = FieldTypeEnum.findByName(category);
         if (Objects.isNull(typeEnum)) {
@@ -86,32 +88,40 @@ public class JsonGenerator {
             return null;
         }
 
-        // 基本类型包装类、日期类、BigDecimal 等特殊常用类型，需要另处理
+        // 监测循环嵌套
         boolean clzFace = Objects.equals(FieldTypeEnum.CLASS, typeEnum) || Objects.equals(FieldTypeEnum.INTERFACE, typeEnum);
         if (clzFace) {
+            if (nestedTypes.contains(fullName)) {
+                return null;
+            }
+            nestedTypes.add(fullName);
+        }
+
+        // 基本类型包装类、日期类、BigDecimal 等特殊常用类型，需要另处理
+        if (clzFace) {
             if (isBoxedWrapper(fullName)) {
-                return getBasicDefault(boxedMap.getOrDefault(fullName, BasicTypeEnum.DEFAULT).getName());
+                return getBasicDefault(boxedMap.getOrDefault(fullName, BasicTypeEnum.DEFAULT).getName(), isDefault);
             } else if (isDateTimeWrapper(fullName)) {
                 return getDatetimeDefault();
             } else if (Objects.equals(fullName, BIG_DECIMAL_STRING)) {
-                return DOUBLE_DEFAULT_VALUE;
+                return ClassUtil.toValue(BigDecimal.class, isDefault);
             }
         }
 
         switch (typeEnum) {
             case BASIC:
-                return getBasicDefault(typeInfo.getSimpleName());
+                return getBasicDefault(typeInfo.getSimpleName(), isDefault);
             case STRING:
             case ENUM:
-                return EMPTY_STRING;
+                return ClassUtil.toValue(String.class, isDefault);
             case CLASS:
             case INTERFACE:
-                return buildObject(typeInfo);
+                return buildObject(typeInfo, isDefault, new HashSet<>(nestedTypes));
             case LIST:
             case ARRAY:
-                return buildList(typeInfo);
+                return buildList(typeInfo, isDefault, new HashSet<>(nestedTypes));
             case MAP:
-                return buildMap(typeInfo);
+                return buildMap(typeInfo, isDefault, new HashSet<>(nestedTypes));
             case FUNCTIONAL:
             case TYPE_PARAM:
             case WILDCARD:
@@ -135,13 +145,15 @@ public class JsonGenerator {
     /**
      * 构建类属性对象
      *
-     * @param typeInfo 类型信息
+     * @param typeInfo    类型信息
+     * @param isDefault   是否设置默认值(true:所有对象的值为类型的默认值 / false:所有对象的值为随机有效值)
+     * @param nestedTypes 嵌套参数路径集合
      * @return 转换后的对象
      */
-    private static Object buildObject(TypeInfo typeInfo) {
+    private static Object buildObject(TypeInfo typeInfo, boolean isDefault, Set<String> nestedTypes) {
         Map<String, Object> map = new LinkedHashMap<>();
         for (FieldInfo field : typeInfo.getFields()) {
-            map.put(field.getFiledName(), buildValue(field.getFieldType()));
+            map.put(field.getFiledName(), buildValue(field.getFieldType(), isDefault, new HashSet<>(nestedTypes)));
         }
         return map;
     }
@@ -149,14 +161,16 @@ public class JsonGenerator {
     /**
      * 构建集合对象
      *
-     * @param typeInfo 类型信息
+     * @param typeInfo    类型信息
+     * @param isDefault   是否设置默认值(true:所有对象的值为类型的默认值 / false:所有对象的值为随机有效值)
+     * @param nestedTypes 嵌套参数路径集合
      * @return 转换后的对象
      */
-    private static Object buildList(TypeInfo typeInfo) {
+    private static Object buildList(TypeInfo typeInfo, boolean isDefault, Set<String> nestedTypes) {
         List<Object> list = new ArrayList<>();
         List<TypeInfo> genericTypes = typeInfo.getGenericTypes();
         if (!genericTypes.isEmpty()) {
-            list.add(buildValue(genericTypes.get(0)));
+            list.add(buildValue(genericTypes.get(0), isDefault, new HashSet<>(nestedTypes)));
         }
         return list;
     }
@@ -164,15 +178,17 @@ public class JsonGenerator {
     /**
      * 构建哈希对象
      *
-     * @param typeInfo 类型信息
+     * @param typeInfo    类型信息
+     * @param isDefault   是否设置默认值(true:所有对象的值为类型的默认值 / false:所有对象的值为随机有效值)
+     * @param nestedTypes 嵌套参数路径集合
      * @return 转换后的对象
      */
-    private static Object buildMap(TypeInfo typeInfo) {
+    private static Object buildMap(TypeInfo typeInfo, boolean isDefault, Set<String> nestedTypes) {
         Map<String, Object> map = new LinkedHashMap<>();
         List<TypeInfo> genericTypes = typeInfo.getGenericTypes();
         if (genericTypes.size() > MIN_MAP_NUM) {
             String key = getDefaultKey(genericTypes.get(0));
-            Object value = buildValue(genericTypes.get(1));
+            Object value = buildValue(genericTypes.get(1), isDefault, new HashSet<>(nestedTypes));
             map.put(key, value);
         }
         return map;
@@ -198,9 +214,10 @@ public class JsonGenerator {
      * 获取基本数据类型的默认值
      *
      * @param simpleName 类名
+     * @param isDefault  是否设置默认值(true:所有对象的值为类型的默认值 / false:所有对象的值为随机有效值)
      * @return 默认值
      */
-    private static Object getBasicDefault(String simpleName) {
+    private static Object getBasicDefault(String simpleName, boolean isDefault) {
         if (StringUtils.isEmpty(simpleName)) {
             return null;
         }
@@ -212,24 +229,25 @@ public class JsonGenerator {
 
         switch (typeEnum) {
             case BYTE:
+                return ClassUtil.toValue(Byte.class, isDefault);
             case SHORT:
+                return ClassUtil.toValue(Short.class, isDefault);
             case INT:
-                return 0;
+                return ClassUtil.toValue(Integer.class, isDefault);
             case LONG:
-                return 0L;
+                return ClassUtil.toValue(Long.class, isDefault);
             case FLOAT:
-                return 0.0F;
+                return ClassUtil.toValue(Float.class, isDefault);
             case DOUBLE:
-                return 0.0;
+                return ClassUtil.toValue(Double.class, isDefault);
             case BOOLEAN:
-                return false;
+                return ClassUtil.toValue(Boolean.class, isDefault);
             case CHAR:
-                return '0';
+                return ClassUtil.toValue(Character.class, isDefault);
             default:
                 return null;
         }
     }
-
 
     /**
      * 是否为常用的日期类型

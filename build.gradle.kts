@@ -48,4 +48,9 @@ tasks {
     compileTestJava {
         options.encoding = "UTF-8"
     }
+
+    initializeIntelliJPlugin {
+        selfUpdateCheck = false
+        offline = true
+    }
 }

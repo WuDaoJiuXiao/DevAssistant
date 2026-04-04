@@ -1,4 +1,4 @@
-package com.jiuxiao.assistant.dto;
+package com.jiuxiao.assistant.dto.extract;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
