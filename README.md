@@ -13,21 +13,26 @@
 >
 > [ ] 配置Maven自定义镜像源
 
-### 一、数据转换
+### 一、数据转换/便捷开发
 
 [✔] **<font color="blue">方法入参转JSON</font>**
 
 + 功能介绍：将方法的所有入参转为 JSON 对象（字段值为默认值）
-+ 使用方式：在类/接口内部的方法名称上右键，选择 "Converse To JSON"
++ 使用方式：在类/接口内部的方法中右键，选择 "Converse To JSON"
 
 [ ] **<font color="red">浏览器负载转JSON</font>**
 
 + 功能介绍：浏览器请求头中复制的键值对格式数据，转为 JSON 格式（适用于爬虫快速构建 Header）
 + 使用方式：
 
-[ ] **<font color="blue">Coltroller快速生成Mock数据</font>**
+[✔] **<font color="blue">Coltroller快速生成Mock数据</font>**
 
 + 功能介绍：Controller 入参自动生成随机合法值，可快速构建 RequestBody
++ 使用方式：在Controller内部的请求方法中右键，选择 "Mock Request Data"
+
+[ ] **<font color="red">项目所有请求列表展示及点击跳转</font>** 
+
++ 功能介绍：项目所有的对外接口列表展示，双击后可以快速跳转到对应的请求方法
 + 使用方式：
 
 [ ] **<font color="red">JSON ↔ Java对象</font>**

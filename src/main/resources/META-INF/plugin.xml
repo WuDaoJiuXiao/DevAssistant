@@ -19,10 +19,21 @@
     ]]></change-notes>
 
     <actions>
+        <!-- 提取方法参数转为JSON对象 -->
         <action id="ExtractMethodInfo"
                 class="com.jiuxiao.assistant.action.ExtractMethodInfoAction"
+                icon="/icon/DevLogo.svg"
                 text="Converse To JSON"
                 description="Extract all input parameters of the current method and build a default JSON request body">
+            <add-to-group group-id="EditorPopupMenu" anchor="last"/>
+        </action>
+
+        <!-- 快速Mock请求体 -->
+        <action id="ControlMock"
+                class="com.jiuxiao.assistant.action.ControlMockAction"
+                icon="/icon/DevLogo.svg"
+                text="Mock Request Data"
+                description="Quickly generate legitimate mock data for the current request method">
             <add-to-group group-id="EditorPopupMenu" anchor="last"/>
         </action>
     </actions>
@@ -30,8 +41,9 @@
     <!-- 其他默认信息 -->
     <depends>com.intellij.modules.platform</depends>
     <depends>com.intellij.java</depends>
-    
+
     <extensions defaultExtensionNs="com.intellij">
+        <!-- 系统通知组件 -->
         <notificationGroup displayType="BALLOON" id="DevAssistant.NotificationGroup"/>
     </extensions>
 
