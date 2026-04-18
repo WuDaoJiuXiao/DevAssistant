@@ -52,5 +52,13 @@
                 implementationClass="com.jiuxiao.assistant.provider.JavaMethodLineMarkerProvider"/>
         <codeInsight.lineMarkerProvider language="XML"
                 implementationClass="com.jiuxiao.assistant.provider.XmlIdLineMarkerProvider"/>
+        <!-- 右侧侧边工具栏 -->
+        <toolWindow id="DevAssistant"
+                    icon="/icon/DevLogo.svg"
+                    anchor="right"
+                    factoryClass="com.jiuxiao.assistant.factory.AssistantToolWindowFactory"
+                    canCloseContents="true"
+                    secondary="false"
+        />
     </extensions>
 </idea-plugin>

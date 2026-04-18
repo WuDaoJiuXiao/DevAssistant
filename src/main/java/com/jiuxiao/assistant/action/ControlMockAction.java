@@ -79,7 +79,7 @@ public class ControlMockAction extends AnAction {
 
         // 显示状态栏提示信息
         SystemHandleUtil.copyToClipboard(jsonObject.toJSONString());
-        SystemHandleUtil.showStatusBarTip(
+        SystemHandleUtil.showInformation(
                 e.getProject(), "Mock数据已复制到剪切板"
         );
     }

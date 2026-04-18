@@ -64,7 +64,7 @@ public class ExtractMethodInfoAction extends AnAction {
 
         String requestBody = JsonGenerator.generateRequestBody(methodInfo, true);
         SystemHandleUtil.copyToClipboard(requestBody);
-        SystemHandleUtil.showStatusBarTip(
+        SystemHandleUtil.showInformation(
                 e.getProject(), "JSON对象已复制到剪切板"
         );
     }

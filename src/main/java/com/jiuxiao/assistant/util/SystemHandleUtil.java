@@ -40,13 +40,13 @@ public class SystemHandleUtil {
     }
 
     /**
-     * 成功消息提示
+     * 消息提示
      *
      * @param project 项目对象
      * @param content 消息内容
      */
-    public static void showSuccess(Project project, String content) {
-        showNotify(project, "成功", content, NotificationType.INFORMATION);
+    public static void showInformation(Project project, String content) {
+        showNotify(project, "消息", content, NotificationType.INFORMATION);
     }
 
     /**
@@ -105,6 +105,7 @@ public class SystemHandleUtil {
             return;
         }
         Notification notification = notificationGroup.createNotification(title, message, notificationType);
+        notification.setImportant(false);
         notification.notify(project);
     }
 }
