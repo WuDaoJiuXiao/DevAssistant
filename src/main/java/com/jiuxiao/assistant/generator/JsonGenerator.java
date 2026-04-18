@@ -17,17 +17,16 @@ import java.util.*;
 
 /**
  * Json对象转换解析器
+ *
+ * @author 悟道九霄
+ * @date 2026-04-18
  */
 public class JsonGenerator {
 
     private static final int MIN_MAP_NUM = 2;
-
     private static final String KEY_STRING = "key";
-
     private static final String DEFAULT_KEY_STRING = "defaultKey";
-
     private static final String BIG_DECIMAL_STRING = "java.math.BigDecimal";
-
     private static final String DATE_FORMATTER = "yyyy-MM-dd HH:mm:ss";
 
     private static final Set<String> dateSet = new HashSet<>(List.of(

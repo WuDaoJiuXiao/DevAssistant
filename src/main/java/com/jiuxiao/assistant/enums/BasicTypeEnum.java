@@ -7,6 +7,9 @@ import java.util.Objects;
 
 /**
  * 基本类型枚举类
+ *
+ * @author 悟道九霄
+ * @date 2026-04-18
  */
 @Getter
 @AllArgsConstructor

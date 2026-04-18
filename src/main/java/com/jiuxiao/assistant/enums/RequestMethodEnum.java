@@ -6,6 +6,9 @@ import java.util.Objects;
 
 /**
  * 请求方式枚举类
+ *
+ * @author 悟道九霄
+ * @date 2026-04-18
  */
 @Getter
 public enum RequestMethodEnum {

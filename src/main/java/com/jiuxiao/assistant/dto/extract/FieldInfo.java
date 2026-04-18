@@ -6,6 +6,9 @@ import lombok.NoArgsConstructor;
 
 /**
  * 字段信息实体类
+ *
+ * @author 悟道九霄
+ * @date 2026-04-18
  */
 @Data
 @NoArgsConstructor

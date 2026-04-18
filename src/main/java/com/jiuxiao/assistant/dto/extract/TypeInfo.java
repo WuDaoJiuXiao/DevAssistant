@@ -9,6 +9,9 @@ import java.util.List;
 
 /**
  * 通用类型信息实体类
+ *
+ * @author 悟道九霄
+ * @date 2026-04-18
  */
 @Data
 @NoArgsConstructor
