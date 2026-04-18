@@ -45,6 +45,12 @@
     <extensions defaultExtensionNs="com.intellij">
         <!-- 系统通知组件 -->
         <notificationGroup displayType="BALLOON" id="DevAssistant.NotificationGroup"/>
+        <!-- Mapper缓存服务 -->
+        <projectService serviceImplementation="com.jiuxiao.assistant.service.MapperXmlCacheService"/>
+        <!-- Mapper与XML互相跳转组件 -->
+        <codeInsight.lineMarkerProvider language="JAVA"
+                implementationClass="com.jiuxiao.assistant.provider.JavaMethodLineMarkerProvider"/>
+        <codeInsight.lineMarkerProvider language="XML"
+                implementationClass="com.jiuxiao.assistant.provider.XmlIdLineMarkerProvider"/>
     </extensions>
-
 </idea-plugin>
