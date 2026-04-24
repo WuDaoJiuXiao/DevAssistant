@@ -36,14 +36,14 @@
 
 [✔] **<font color="red">字符串解密/解码</font>**：对字符串解密（类似操作统称解密）操作，如 Base64、URL、Hex、AES、RSA、JWT等
 
-[ ] **<font color="red">数据生成</font>**：生成常用的一些数据如 UUID、雪花ID、时间戳等
+[✔] **<font color="red">数据生成</font>**：生成常用的一些数据如 UUID、雪花ID、时间戳等
 
 [ ] **<font color="red">Maven依赖快速搜索</font>**：输入关键词搜索Maven依赖（支持自定义镜像源）
 
-[ ] **<font color="red">机器IP信息获取</font>**：获取当前机器的IP配置信息
+[✔] **<font color="red">机器IP信息获取</font>**：获取当前机器的IP配置信息
 
-[ ] **<font color="red">Mybatis SQL日志还原</font>**：控制台带有 ? 的 SQL 语句，自动填充参数，生成可执行的 SQL
+[✔] **<font color="red">Mybatis SQL日志还原</font>**：控制台带有 ? 的 SQL 语句，自动填充参数，生成可执行的 SQL
 
 [✔] **<font color="red">文本去空格/换行</font>**：快速去除文本中多余的空格、换行
 
-[ ] **<font color="red">常用正则表达式</font>**：生成常见的正则表达式
+[✔] **<font color="red">常用正则表达式</font>**：生成常见的正则表达式

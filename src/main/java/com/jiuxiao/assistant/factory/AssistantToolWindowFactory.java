@@ -8,6 +8,7 @@ import com.intellij.ui.content.Content;
 import com.intellij.ui.content.ContentFactory;
 import com.jiuxiao.assistant.enums.PanelEnum;
 import com.jiuxiao.assistant.panel.DataConversionPanel;
+import com.jiuxiao.assistant.panel.DevAssistantPanel;
 import com.jiuxiao.assistant.panel.SecurityCryptoPanel;
 import com.jiuxiao.assistant.panel.TextProcessingPanel;
 import org.jetbrains.annotations.NotNull;
@@ -38,9 +39,11 @@ public class AssistantToolWindowFactory implements ToolWindowFactory {
         DataConversionPanel dataConversionPanel = new DataConversionPanel(project);
         TextProcessingPanel textProcessingPanel = new TextProcessingPanel(project);
         SecurityCryptoPanel securityCryptoPanel = new SecurityCryptoPanel(project);
+        DevAssistantPanel devAssistantPanel = new DevAssistantPanel(project);
         mainTabbedPane.addTab(PanelEnum.FORMAT_CONVERSION.getPanel(), dataConversionPanel);
         mainTabbedPane.addTab(PanelEnum.TEXT_PROCESSING.getPanel(), textProcessingPanel);
         mainTabbedPane.addTab(PanelEnum.SECURITY_CRYPTO.getPanel(), securityCryptoPanel);
+        mainTabbedPane.addTab(PanelEnum.DEV_ASSISTANT.getPanel(), devAssistantPanel);
 
         // 添加到ToolWindow
         ContentFactory contentFactory = ContentFactory.getInstance();
