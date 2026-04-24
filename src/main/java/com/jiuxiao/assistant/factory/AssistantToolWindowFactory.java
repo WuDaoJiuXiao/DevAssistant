@@ -8,6 +8,7 @@ import com.intellij.ui.content.Content;
 import com.intellij.ui.content.ContentFactory;
 import com.jiuxiao.assistant.enums.PanelEnum;
 import com.jiuxiao.assistant.panel.DataConversionPanel;
+import com.jiuxiao.assistant.panel.TextProcessingPanel;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
@@ -34,7 +35,9 @@ public class AssistantToolWindowFactory implements ToolWindowFactory {
 
         // 添加数据转换Tab（聚合多个功能）
         DataConversionPanel dataConversionPanel = new DataConversionPanel(project);
+        TextProcessingPanel textProcessingPanel = new TextProcessingPanel(project);
         mainTabbedPane.addTab(PanelEnum.FORMAT_CONVERSION.getPanel(), dataConversionPanel);
+        mainTabbedPane.addTab(PanelEnum.TEXT_PROCESSING.getPanel(), textProcessingPanel);
 
         // 添加到ToolWindow
         ContentFactory contentFactory = ContentFactory.getInstance();
