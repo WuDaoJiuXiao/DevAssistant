@@ -26,7 +26,7 @@
 
 [✔] **<font color="red">JSON ↔ Java对象</font>**：JSON数据与Java实体类互相转换
 
-[ ] **<font color="red">JSON ↔ XML互转</font>**：输入待转换的字符串，选择对应功能进行转换
+[✔] **<font color="red">JSON ↔ XML互转</font>**：输入待转换的字符串，选择对应功能进行转换
 
 [ ] **<font color="red">驼峰、下换线、蛇形互转</font>**：输入待转换的字符串，自动生成所有命名方式
 

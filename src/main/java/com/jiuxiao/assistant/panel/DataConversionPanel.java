@@ -4,6 +4,7 @@ import com.intellij.openapi.project.Project;
 import com.jiuxiao.assistant.enums.HandlerEnum;
 import com.jiuxiao.assistant.enums.PanelEnum;
 import com.jiuxiao.assistant.handler.JsonToJavaHandler;
+import com.jiuxiao.assistant.handler.JsonXmlHandler;
 import com.jiuxiao.assistant.handler.PayloadToJsonHandler;
 import com.jiuxiao.assistant.handler.TimestampHandler;
 import com.jiuxiao.assistant.util.SystemHandleUtil;
@@ -24,6 +25,7 @@ public class DataConversionPanel extends BaseMultiFunctionPanel {
     private final TimestampHandler timestampHandler;
     private final PayloadToJsonHandler payloadToJsonHandler;
     private final JsonToJavaHandler jsonToJavaHandler;
+    private final JsonXmlHandler jsonXmlHandler;
     private JPanel currentFunctionPanel;
 
     /**
@@ -38,6 +40,7 @@ public class DataConversionPanel extends BaseMultiFunctionPanel {
         timestampHandler = new TimestampHandler();
         payloadToJsonHandler = new PayloadToJsonHandler();
         jsonToJavaHandler = new JsonToJavaHandler();
+        jsonXmlHandler = new JsonXmlHandler();
 
         onFunctionChanged();
     }
@@ -52,6 +55,7 @@ public class DataConversionPanel extends BaseMultiFunctionPanel {
         combo.addItem(HandlerEnum.TIMESTAMP_SYNC_DATE.getFunction());
         combo.addItem(HandlerEnum.PAYLOAD_TO_JSON.getFunction());
         combo.addItem(HandlerEnum.JSON_SYNC_JAVA.getFunction());
+        combo.addItem(HandlerEnum.JSON_SYNC_XML.getFunction());
     }
 
     /**
@@ -81,6 +85,9 @@ public class DataConversionPanel extends BaseMultiFunctionPanel {
                 break;
             case JSON_SYNC_JAVA:
                 currentFunctionPanel = jsonToJavaHandler.createPanel();
+                break;
+            case JSON_SYNC_XML:
+                currentFunctionPanel = jsonXmlHandler.createPanel();
                 break;
             default:
                 break;
@@ -129,6 +136,9 @@ public class DataConversionPanel extends BaseMultiFunctionPanel {
                 case JSON_SYNC_JAVA:
                     result = jsonToJavaHandler.execute(input);
                     break;
+                case JSON_SYNC_XML:
+                    result = jsonXmlHandler.execute(input);
+                    break;
                 default:
                     result = "未选择功能";
             }
@@ -160,6 +170,9 @@ public class DataConversionPanel extends BaseMultiFunctionPanel {
                 break;
             case JSON_SYNC_JAVA:
                 example = jsonToJavaHandler.getExample();
+                break;
+            case JSON_SYNC_XML:
+                example = jsonXmlHandler.getExample();
                 break;
             default:
                 return;
