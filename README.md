@@ -32,9 +32,9 @@
 
 [✔] **<font color="red">进制互转</font>**：二进制、八进制、十进制、十六进制互转（支持自定义进制数）
 
-[ ] **<font color="red">字符串加密/编码/摘要</font>**：对字符串加密（类似操作统称加密）操作，如 Bese64、URL、Hex、MD5、SHA-256、AES、RSA、HmacSHA256等
+[✔] **<font color="red">字符串加密/编码/摘要</font>**：对字符串加密（类似操作统称加密）操作，如 Bese64、URL、Hex、MD5、SHA-256、AES、RSA、HmacSHA256等
 
-[ ] **<font color="red">字符串解密/解码</font>**：对字符串解密（类似操作统称解密）操作，如 Base64、URL、Hex、AES、RSA、JWT等
+[✔] **<font color="red">字符串解密/解码</font>**：对字符串解密（类似操作统称解密）操作，如 Base64、URL、Hex、AES、RSA、JWT等
 
 [ ] **<font color="red">数据生成</font>**：生成常用的一些数据如 UUID、雪花ID、时间戳等
 
