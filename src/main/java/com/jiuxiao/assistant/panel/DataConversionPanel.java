@@ -3,6 +3,7 @@ package com.jiuxiao.assistant.panel;
 import com.intellij.openapi.project.Project;
 import com.jiuxiao.assistant.enums.HandlerEnum;
 import com.jiuxiao.assistant.enums.PanelEnum;
+import com.jiuxiao.assistant.handler.BinaryHandler;
 import com.jiuxiao.assistant.handler.JsonToJavaHandler;
 import com.jiuxiao.assistant.handler.JsonXmlHandler;
 import com.jiuxiao.assistant.handler.PayloadToJsonHandler;
@@ -26,6 +27,7 @@ public class DataConversionPanel extends BaseMultiFunctionPanel {
     private final PayloadToJsonHandler payloadToJsonHandler;
     private final JsonToJavaHandler jsonToJavaHandler;
     private final JsonXmlHandler jsonXmlHandler;
+    private final BinaryHandler binaryHandler;
     private JPanel currentFunctionPanel;
 
     /**
@@ -41,6 +43,7 @@ public class DataConversionPanel extends BaseMultiFunctionPanel {
         payloadToJsonHandler = new PayloadToJsonHandler();
         jsonToJavaHandler = new JsonToJavaHandler();
         jsonXmlHandler = new JsonXmlHandler();
+        binaryHandler = new BinaryHandler();
 
         onFunctionChanged();
     }
@@ -56,6 +59,7 @@ public class DataConversionPanel extends BaseMultiFunctionPanel {
         combo.addItem(HandlerEnum.PAYLOAD_TO_JSON.getFunction());
         combo.addItem(HandlerEnum.JSON_SYNC_JAVA.getFunction());
         combo.addItem(HandlerEnum.JSON_SYNC_XML.getFunction());
+        combo.addItem(HandlerEnum.BINARY_SYNC.getFunction());
     }
 
     /**
@@ -88,6 +92,9 @@ public class DataConversionPanel extends BaseMultiFunctionPanel {
                 break;
             case JSON_SYNC_XML:
                 currentFunctionPanel = jsonXmlHandler.createPanel();
+                break;
+            case BINARY_SYNC:
+                currentFunctionPanel = binaryHandler.createPanel();
                 break;
             default:
                 break;
@@ -139,6 +146,9 @@ public class DataConversionPanel extends BaseMultiFunctionPanel {
                 case JSON_SYNC_XML:
                     result = jsonXmlHandler.execute(input);
                     break;
+                case BINARY_SYNC:
+                    result = binaryHandler.execute(input);
+                    break;
                 default:
                     result = "未选择功能";
             }
@@ -173,6 +183,9 @@ public class DataConversionPanel extends BaseMultiFunctionPanel {
                 break;
             case JSON_SYNC_XML:
                 example = jsonXmlHandler.getExample();
+                break;
+            case BINARY_SYNC:
+                example = binaryHandler.getExample();
                 break;
             default:
                 return;
