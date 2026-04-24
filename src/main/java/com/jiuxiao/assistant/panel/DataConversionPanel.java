@@ -3,6 +3,8 @@ package com.jiuxiao.assistant.panel;
 import com.intellij.openapi.project.Project;
 import com.jiuxiao.assistant.enums.HandlerEnum;
 import com.jiuxiao.assistant.enums.PanelEnum;
+import com.jiuxiao.assistant.handler.JsonToJavaHandler;
+import com.jiuxiao.assistant.handler.PayloadToJsonHandler;
 import com.jiuxiao.assistant.handler.TimestampHandler;
 import com.jiuxiao.assistant.util.SystemHandleUtil;
 
@@ -12,7 +14,6 @@ import java.util.Objects;
 /**
  * 数据转换Tab面板
  * 该类继承自BaseMultiFunctionPanel，实现了数据转换相关的功能界面
- * 支持时间戳转换和Base64编解码两种功能
  *
  * @author 悟道九霄
  * @date 2026-04-18
@@ -21,6 +22,8 @@ public class DataConversionPanel extends BaseMultiFunctionPanel {
 
     private final Project project;
     private final TimestampHandler timestampHandler;
+    private final PayloadToJsonHandler payloadToJsonHandler;
+    private final JsonToJavaHandler jsonToJavaHandler;
     private JPanel currentFunctionPanel;
 
     /**
@@ -32,8 +35,9 @@ public class DataConversionPanel extends BaseMultiFunctionPanel {
         this.project = project;
         this.panelTitle = PanelEnum.FORMAT_CONVERSION.getPanel();
 
-        // 初始化功能处理器
         timestampHandler = new TimestampHandler();
+        payloadToJsonHandler = new PayloadToJsonHandler();
+        jsonToJavaHandler = new JsonToJavaHandler();
 
         onFunctionChanged();
     }
@@ -46,6 +50,8 @@ public class DataConversionPanel extends BaseMultiFunctionPanel {
     @Override
     protected void populateFunctionCombo(JComboBox<String> combo) {
         combo.addItem(HandlerEnum.TIMESTAMP_SYNC_DATE.getFunction());
+        combo.addItem(HandlerEnum.PAYLOAD_TO_JSON.getFunction());
+        combo.addItem(HandlerEnum.JSON_SYNC_JAVA.getFunction());
     }
 
     /**
@@ -69,6 +75,12 @@ public class DataConversionPanel extends BaseMultiFunctionPanel {
         switch (handlerEnum) {
             case TIMESTAMP_SYNC_DATE:
                 currentFunctionPanel = timestampHandler.createPanel();
+                break;
+            case PAYLOAD_TO_JSON:
+                currentFunctionPanel = payloadToJsonHandler.createPanel();
+                break;
+            case JSON_SYNC_JAVA:
+                currentFunctionPanel = jsonToJavaHandler.createPanel();
                 break;
             default:
                 break;
@@ -111,6 +123,12 @@ public class DataConversionPanel extends BaseMultiFunctionPanel {
                 case TIMESTAMP_SYNC_DATE:
                     result = timestampHandler.execute(input);
                     break;
+                case PAYLOAD_TO_JSON:
+                    result = payloadToJsonHandler.execute(input);
+                    break;
+                case JSON_SYNC_JAVA:
+                    result = jsonToJavaHandler.execute(input);
+                    break;
                 default:
                     result = "未选择功能";
             }
@@ -136,6 +154,12 @@ public class DataConversionPanel extends BaseMultiFunctionPanel {
         switch (handlerEnum) {
             case TIMESTAMP_SYNC_DATE:
                 example = timestampHandler.getExample();
+                break;
+            case PAYLOAD_TO_JSON:
+                example = payloadToJsonHandler.getExample();
+                break;
+            case JSON_SYNC_JAVA:
+                example = jsonToJavaHandler.getExample();
                 break;
             default:
                 return;

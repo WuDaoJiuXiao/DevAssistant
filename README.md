@@ -24,7 +24,7 @@
 
 [ ] **<font color="red">项目所有请求列表展示及点击跳转</font>**：项目所有的对外接口列表展示，双击后可以快速跳转到对应的请求方法
 
-[ ] **<font color="red">JSON ↔ Java对象</font>**：JSON数据与Java实体类互相转换
+[✔] **<font color="red">JSON ↔ Java对象</font>**：JSON数据与Java实体类互相转换
 
 [ ] **<font color="red">JSON ↔ XML互转</font>**：输入待转换的字符串，选择对应功能进行转换
 
