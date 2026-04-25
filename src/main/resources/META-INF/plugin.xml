@@ -57,7 +57,7 @@
                     icon="/icon/DevLogo.svg"
                     anchor="right"
                     factoryClass="com.jiuxiao.assistant.factory.AssistantToolWindowFactory"
-                    canCloseContents="true"
+                    canCloseContents="false"
                     secondary="false"
         />
     </extensions>

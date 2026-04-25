@@ -30,6 +30,12 @@ public abstract class BaseMultiFunctionPanel extends JPanel {
     protected String panelTitle = "工具";
 
     public BaseMultiFunctionPanel() {
+        UIManager.put("Label.font", new Font(null, Font.PLAIN, 11));
+        UIManager.put("Button.font", new Font(null, Font.PLAIN, 11));
+        UIManager.put("TextField.font", new Font(null, Font.PLAIN, 11));
+        UIManager.put("CheckBox.font", new Font(null, Font.PLAIN, 11));
+        UIManager.put("RadioButton.font", new Font(null, Font.PLAIN, 11));
+        UIManager.put("ComboBox.font", new Font(null, Font.PLAIN, 11));
         initUI();
     }
 
@@ -55,7 +61,7 @@ public abstract class BaseMultiFunctionPanel extends JPanel {
         add(outputPanel, BorderLayout.SOUTH);
 
         // 设置面板大小
-        setPreferredSize(new Dimension(600, 500));
+        setPreferredSize(new Dimension(500, 400));
     }
 
     /**
@@ -74,8 +80,8 @@ public abstract class BaseMultiFunctionPanel extends JPanel {
 
 
         // 创建文本输入区域
-        inputArea = new JTextArea(8, 40);
-        inputArea.setFont(new Font("Monospaced", Font.PLAIN, 12));
+        inputArea = new JTextArea(9, 40);
+        inputArea.setFont(new Font("Monospaced", Font.PLAIN, 11));
         inputArea.setLineWrap(true);
         inputArea.setWrapStyleWord(true);
 
@@ -131,7 +137,7 @@ public abstract class BaseMultiFunctionPanel extends JPanel {
         panel.add(topPanel, BorderLayout.NORTH);
 
         // 中间：动态按钮面板
-        dynamicButtonPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 5));
+        dynamicButtonPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 5, 0));
         dynamicButtonPanel.setBackground(null);
         panel.add(dynamicButtonPanel, BorderLayout.CENTER);
 
@@ -152,8 +158,8 @@ public abstract class BaseMultiFunctionPanel extends JPanel {
         ));
 
         // 创建文本输出区域
-        outputArea = new JTextArea(8, 40);
-        outputArea.setFont(new Font("Monospaced", Font.PLAIN, 12));
+        outputArea = new JTextArea(9, 40);
+        outputArea.setFont(new Font("Monospaced", Font.PLAIN, 11));
         outputArea.setLineWrap(true);
         outputArea.setWrapStyleWord(true);
         outputArea.setEditable(false);
