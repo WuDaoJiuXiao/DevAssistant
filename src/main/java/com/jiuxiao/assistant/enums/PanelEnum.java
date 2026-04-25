@@ -19,6 +19,7 @@ public enum PanelEnum {
     TEXT_PROCESSING(1, "文本处理"),
     SECURITY_CRYPTO(3, "安全加密"),
     DEV_ASSISTANT(4, "开发辅助"),
+    OTHER_TOOLS(5, "其他工具")
     ;
 
     private final Integer code;

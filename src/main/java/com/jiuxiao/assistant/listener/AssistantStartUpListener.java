@@ -4,6 +4,7 @@ import com.intellij.openapi.application.ApplicationActivationListener;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.wm.IdeFrame;
+import com.jiuxiao.assistant.service.ControllerRequestCacheService;
 import com.jiuxiao.assistant.service.MapperXmlCacheService;
 import org.jetbrains.annotations.NotNull;
 
@@ -41,20 +42,28 @@ public class AssistantStartUpListener implements ApplicationActivationListener {
 
             // 等待索引就绪后执行初始化操作
             com.intellij.openapi.project.DumbService.getInstance(project).runWhenSmart(() -> {
-                // 在读模式下执行初始化操作，避免阻塞其他操作
                 ApplicationManager.getApplication().runReadAction(() -> {
+                    // 初始化 Mapper Sync XML 缓存服务
                     try {
-                        // 获取MapperXmlCacheService实例
                         MapperXmlCacheService mapperXmlCacheService = project.getService(MapperXmlCacheService.class);
-                        // 检查服务实例是否有效，如果有效则初始化Mapper XML映射
                         if (Objects.nonNull(mapperXmlCacheService)) {
                             // 使用增量初始化而不是全量，提高初始化效率
                             mapperXmlCacheService.initMapperXmlMap();
                         }
                     } catch (Exception e) {
-                        // 记录初始化失败的警告日志
                         com.intellij.openapi.diagnostic.Logger.getInstance(AssistantStartUpListener.class)
                                 .warn("Failed to init Mapper XML cache", e);
+                    }
+
+                    // 初始化 Controller 扫描服务
+                    try {
+                        ControllerRequestCacheService controllerRequestCacheService = project.getService(ControllerRequestCacheService.class);
+                        if (Objects.nonNull(controllerRequestCacheService)) {
+                            controllerRequestCacheService.initControllerRequestMap();
+                        }
+                    } catch (Exception e) {
+                        com.intellij.openapi.diagnostic.Logger.getInstance(AssistantStartUpListener.class)
+                                .warn("Failed to init Controller Request cache", e);
                     }
                 });
             });

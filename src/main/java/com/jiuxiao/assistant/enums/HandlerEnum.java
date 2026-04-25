@@ -6,6 +6,8 @@ import lombok.Getter;
 import java.util.Objects;
 
 /**
+ * 处理器类型枚举类
+ *
  * @author 悟道九霄
  * @date 2026/4/18
  */
@@ -28,9 +30,10 @@ public enum HandlerEnum {
     PATTERN(9, "常用正则", PanelEnum.DEV_ASSISTANT),
     DATA_GENERATION(10, "常用数据生成", PanelEnum.DEV_ASSISTANT),
     MACHINE_INFORMATION(11, "机器IP信息", PanelEnum.DEV_ASSISTANT),
-    REQUEST_LIST(12, "项目请求列表", PanelEnum.DEV_ASSISTANT),
-    MAVEN_DEPENDENCY(13, "Maven依赖", PanelEnum.DEV_ASSISTANT),
-    MYBATIS_SQL(14, "Mybatis SQL 还原", PanelEnum.DEV_ASSISTANT),
+    MYBATIS_SQL(12, "Mybatis SQL 还原", PanelEnum.DEV_ASSISTANT),
+
+    REQUEST_LIST(13, "项目请求列表", PanelEnum.OTHER_TOOLS),
+    MAVEN_DEPENDENCY(14, "Maven依赖", PanelEnum.OTHER_TOOLS),
 
     ;
     private final Integer code;

@@ -20,9 +20,9 @@
 
 [✔] **<font color="red">时间戳 ↔ 日期互转</font>**：时间戳和日期互转，支持自定义格式
 
-[ ] **<font color="red">浏览器负载转JSON</font>**：浏览器请求头中复制的键值对格式数据，转为 JSON 格式（适用于爬虫快速构建 Header）
+[✔] **<font color="red">浏览器负载转JSON</font>**：浏览器请求头中复制的键值对格式数据，转为 JSON 格式（适用于爬虫快速构建 Header）
 
-[ ] **<font color="red">项目所有请求列表展示及点击跳转</font>**：项目所有的对外接口列表展示，双击后可以快速跳转到对应的请求方法
+[✔] **<font color="red">项目所有请求列表展示及点击跳转</font>**：项目所有的对外接口列表展示，双击后可以快速跳转到对应的请求方法
 
 [✔] **<font color="red">JSON ↔ Java对象</font>**：JSON数据与Java实体类互相转换
 

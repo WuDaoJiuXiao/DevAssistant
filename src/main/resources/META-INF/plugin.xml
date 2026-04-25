@@ -47,11 +47,13 @@
         <notificationGroup displayType="BALLOON" id="DevAssistant.NotificationGroup"/>
         <!-- Mapper缓存服务 -->
         <projectService serviceImplementation="com.jiuxiao.assistant.service.MapperXmlCacheService"/>
+        <!-- Controller 缓存服务 -->
+        <projectService serviceImplementation="com.jiuxiao.assistant.service.ControllerRequestCacheService"/>
         <!-- Mapper与XML互相跳转组件 -->
         <codeInsight.lineMarkerProvider language="JAVA"
-                implementationClass="com.jiuxiao.assistant.provider.JavaMethodLineMarkerProvider"/>
+                                        implementationClass="com.jiuxiao.assistant.provider.JavaMethodLineMarkerProvider"/>
         <codeInsight.lineMarkerProvider language="XML"
-                implementationClass="com.jiuxiao.assistant.provider.XmlIdLineMarkerProvider"/>
+                                        implementationClass="com.jiuxiao.assistant.provider.XmlIdLineMarkerProvider"/>
         <!-- 右侧侧边工具栏 -->
         <toolWindow id="DevAssistant"
                     icon="/icon/DevLogo.svg"
