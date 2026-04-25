@@ -3,11 +3,8 @@ package com.jiuxiao.assistant.panel;
 import com.intellij.openapi.project.Project;
 import com.jiuxiao.assistant.enums.HandlerEnum;
 import com.jiuxiao.assistant.enums.PanelEnum;
-import com.jiuxiao.assistant.handler.BinaryHandler;
-import com.jiuxiao.assistant.handler.JsonToJavaHandler;
-import com.jiuxiao.assistant.handler.JsonXmlHandler;
-import com.jiuxiao.assistant.handler.PayloadToJsonHandler;
-import com.jiuxiao.assistant.handler.TimestampHandler;
+import com.jiuxiao.assistant.handler.*;
+import com.jiuxiao.assistant.handler.JsonSyncXmlHandler;
 import com.jiuxiao.assistant.util.SystemHandleUtil;
 
 import javax.swing.*;
@@ -25,8 +22,8 @@ public class DataConversionPanel extends BaseMultiFunctionPanel {
     private final Project project;
     private final TimestampHandler timestampHandler;
     private final PayloadToJsonHandler payloadToJsonHandler;
-    private final JsonToJavaHandler jsonToJavaHandler;
-    private final JsonXmlHandler jsonXmlHandler;
+    private final JsonSyncJavaHandler jsonSyncJavaHandler;
+    private final JsonSyncXmlHandler jsonSyncXmlHandler;
     private final BinaryHandler binaryHandler;
     private JPanel currentFunctionPanel;
 
@@ -41,8 +38,8 @@ public class DataConversionPanel extends BaseMultiFunctionPanel {
 
         timestampHandler = new TimestampHandler();
         payloadToJsonHandler = new PayloadToJsonHandler();
-        jsonToJavaHandler = new JsonToJavaHandler();
-        jsonXmlHandler = new JsonXmlHandler();
+        jsonSyncJavaHandler = new JsonSyncJavaHandler();
+        jsonSyncXmlHandler = new JsonSyncXmlHandler();
         binaryHandler = new BinaryHandler();
 
         onFunctionChanged();
@@ -88,10 +85,10 @@ public class DataConversionPanel extends BaseMultiFunctionPanel {
                 currentFunctionPanel = payloadToJsonHandler.createPanel();
                 break;
             case JSON_SYNC_JAVA:
-                currentFunctionPanel = jsonToJavaHandler.createPanel();
+                currentFunctionPanel = jsonSyncJavaHandler.createPanel();
                 break;
             case JSON_SYNC_XML:
-                currentFunctionPanel = jsonXmlHandler.createPanel();
+                currentFunctionPanel = jsonSyncXmlHandler.createPanel();
                 break;
             case BINARY_SYNC:
                 currentFunctionPanel = binaryHandler.createPanel();
@@ -141,10 +138,10 @@ public class DataConversionPanel extends BaseMultiFunctionPanel {
                     result = payloadToJsonHandler.execute(input);
                     break;
                 case JSON_SYNC_JAVA:
-                    result = jsonToJavaHandler.execute(input);
+                    result = jsonSyncJavaHandler.execute(input);
                     break;
                 case JSON_SYNC_XML:
-                    result = jsonXmlHandler.execute(input);
+                    result = jsonSyncXmlHandler.execute(input);
                     break;
                 case BINARY_SYNC:
                     result = binaryHandler.execute(input);
@@ -179,10 +176,10 @@ public class DataConversionPanel extends BaseMultiFunctionPanel {
                 example = payloadToJsonHandler.getExample();
                 break;
             case JSON_SYNC_JAVA:
-                example = jsonToJavaHandler.getExample();
+                example = jsonSyncJavaHandler.getExample();
                 break;
             case JSON_SYNC_XML:
-                example = jsonXmlHandler.getExample();
+                example = jsonSyncXmlHandler.getExample();
                 break;
             case BINARY_SYNC:
                 example = binaryHandler.getExample();
