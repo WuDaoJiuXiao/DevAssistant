@@ -7,6 +7,7 @@ import com.jiuxiao.assistant.handler.DataGenerationHandler;
 import com.jiuxiao.assistant.handler.MachineInfoHandler;
 import com.jiuxiao.assistant.handler.MybatisSqlHandler;
 import com.jiuxiao.assistant.handler.PatternHandler;
+import com.jiuxiao.assistant.panel.base.BaseMultiFunctionPanel;
 import com.jiuxiao.assistant.util.SystemHandleUtil;
 
 import javax.swing.*;

@@ -5,6 +5,7 @@ import com.jiuxiao.assistant.enums.HandlerEnum;
 import com.jiuxiao.assistant.enums.PanelEnum;
 import com.jiuxiao.assistant.handler.StrDecodeHandler;
 import com.jiuxiao.assistant.handler.StrEncodeHandler;
+import com.jiuxiao.assistant.panel.base.BaseMultiFunctionPanel;
 import com.jiuxiao.assistant.util.SystemHandleUtil;
 
 import javax.swing.*;

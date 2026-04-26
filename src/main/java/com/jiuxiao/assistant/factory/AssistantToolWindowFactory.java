@@ -9,9 +9,9 @@ import com.intellij.ui.content.ContentFactory;
 import com.jiuxiao.assistant.enums.PanelEnum;
 import com.jiuxiao.assistant.panel.DataConversionPanel;
 import com.jiuxiao.assistant.panel.DevAssistantPanel;
-import com.jiuxiao.assistant.panel.OtherToolsPanel;
 import com.jiuxiao.assistant.panel.SecurityCryptoPanel;
 import com.jiuxiao.assistant.panel.TextProcessingPanel;
+import com.jiuxiao.assistant.panel.base.CustomFunctionPanel;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
@@ -40,12 +40,12 @@ public class AssistantToolWindowFactory implements ToolWindowFactory {
         TextProcessingPanel textProcessingPanel = new TextProcessingPanel(project);
         SecurityCryptoPanel securityCryptoPanel = new SecurityCryptoPanel(project);
         DevAssistantPanel devAssistantPanel = new DevAssistantPanel(project);
-        OtherToolsPanel otherToolsPanel = new OtherToolsPanel(project);
+        CustomFunctionPanel customFunctionPanel = new CustomFunctionPanel(project);
         mainTabbedPane.addTab(PanelEnum.FORMAT_CONVERSION.getPanel(), dataConversionPanel);
         mainTabbedPane.addTab(PanelEnum.TEXT_PROCESSING.getPanel(), textProcessingPanel);
         mainTabbedPane.addTab(PanelEnum.SECURITY_CRYPTO.getPanel(), securityCryptoPanel);
         mainTabbedPane.addTab(PanelEnum.DEV_ASSISTANT.getPanel(), devAssistantPanel);
-        mainTabbedPane.addTab(PanelEnum.OTHER_TOOLS.getPanel(), otherToolsPanel);
+        mainTabbedPane.addTab(PanelEnum.OTHER_TOOLS.getPanel(), customFunctionPanel);
 
         // 添加到ToolWindow
         ContentFactory contentFactory = ContentFactory.getInstance();

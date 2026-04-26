@@ -5,6 +5,7 @@ import com.jiuxiao.assistant.enums.HandlerEnum;
 import com.jiuxiao.assistant.enums.PanelEnum;
 import com.jiuxiao.assistant.handler.*;
 import com.jiuxiao.assistant.handler.JsonSyncXmlHandler;
+import com.jiuxiao.assistant.panel.base.BaseMultiFunctionPanel;
 import com.jiuxiao.assistant.util.SystemHandleUtil;
 
 import javax.swing.*;

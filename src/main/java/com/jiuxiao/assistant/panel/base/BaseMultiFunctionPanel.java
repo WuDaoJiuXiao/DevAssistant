@@ -1,4 +1,4 @@
-package com.jiuxiao.assistant.panel;
+package com.jiuxiao.assistant.panel.base;
 
 import com.intellij.openapi.ui.ComboBox;
 import com.intellij.ui.Gray;
