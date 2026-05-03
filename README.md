@@ -6,11 +6,6 @@
 > <font color="blue">蓝色标题</font> 操作方式均为右键，结果默认复制到粘贴板 / 直接点击图标
 >
 > <font color="red">红色标题</font> 均在右侧边栏页面进行操作
->
-> [ ] 提示方式切换：右下角通知弹窗、左下角状态栏静默通知(TODO)
->
-> [ ] 配置Maven自定义镜像源
-
 
 [✔] **<font color="blue">方法入参转JSON</font>**：在类/接口内部的方法中右键，选择 "Converse To JSON"
 
@@ -38,7 +33,7 @@
 
 [✔] **<font color="red">数据生成</font>**：生成常用的一些数据如 UUID、雪花ID、时间戳等
 
-[ ] **<font color="red">Maven依赖快速搜索</font>**：输入关键词搜索Maven依赖（支持自定义镜像源）
+[✔] **<font color="red">Maven依赖快速搜索</font>**：输入关键词搜索Maven依赖
 
 [✔] **<font color="red">机器IP信息获取</font>**：获取当前机器的IP配置信息
 
