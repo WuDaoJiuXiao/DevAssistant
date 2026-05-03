@@ -79,73 +79,74 @@ public class MavenPanel extends JPanel {
         searchPanel.setBorder(JBUI.Borders.empty(5));
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = JBUI.insets(2, 5);
-        gbc.fill = GridBagConstraints.NONE;
-        gbc.anchor = GridBagConstraints.WEST;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
 
-        // ========== 第一行 ==========
-        // ArtifactId 标签
+        // ========== 第一行：ArtifactId ==========
+        // ArtifactId 标签（右对齐，占20%宽度）
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.gridwidth = 1;
+        gbc.weightx = 0.2;
+        gbc.anchor = GridBagConstraints.EAST;
         JLabel artifactIdLabel = createLabel("ArtifactId:");
         searchPanel.add(artifactIdLabel, gbc);
 
-        // ArtifactId 搜索框
+        // ArtifactId 搜索框（占80%宽度）
         gbc.gridx = 1;
         gbc.gridy = 0;
+        gbc.weightx = 0.8;
+        gbc.anchor = GridBagConstraints.WEST;
         artifactIdField = createTextField();
-        artifactIdField.setPreferredSize(new Dimension(120, 28));
+        artifactIdField.setPreferredSize(new Dimension(0, 28));
         searchPanel.add(artifactIdField, gbc);
 
-        // Version 标签
-        gbc.gridx = 2;
-        gbc.gridy = 0;
+        // ========== 第二行：Version ==========
+        // Version 标签（右对齐，占20%宽度）
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        gbc.weightx = 0.2;
+        gbc.anchor = GridBagConstraints.EAST;
         JLabel versionLabel = createLabel("Version:");
         searchPanel.add(versionLabel, gbc);
 
-        // Version 搜索框
-        gbc.gridx = 3;
-        gbc.gridy = 0;
+        // Version 搜索框（占80%宽度）
+        gbc.gridx = 1;
+        gbc.gridy = 1;
+        gbc.weightx = 0.8;
+        gbc.anchor = GridBagConstraints.WEST;
         versionField = createTextField();
-        versionField.setPreferredSize(new Dimension(120, 28));
+        versionField.setPreferredSize(new Dimension(0, 28));
         searchPanel.add(versionField, gbc);
 
-        // 第一行右侧填充
-        gbc.gridx = 4;
-        gbc.gridy = 0;
-        gbc.weightx = 1.0;
-        searchPanel.add(Box.createHorizontalGlue(), gbc);
-
-        // ========== 第二行 ==========
-        // 镜像标签
+        // ========== 第三行：镜像下拉框和搜索按钮 ==========
+        // 镜像标签（右对齐，占20%宽度）
         gbc.gridx = 0;
-        gbc.gridy = 1;
-        gbc.weightx = 0;
+        gbc.gridy = 2;
+        gbc.weightx = 0.2;
+        gbc.anchor = GridBagConstraints.EAST;
         JLabel mirrorLabel = createLabel("镜像:");
         searchPanel.add(mirrorLabel, gbc);
 
-        // 镜像选择下拉框
+        // 镜像下拉框和搜索按钮容器（占80%宽度）
         gbc.gridx = 1;
-        gbc.gridy = 1;
+        gbc.gridy = 2;
+        gbc.weightx = 0.8;
+        gbc.anchor = GridBagConstraints.WEST;
+        JPanel actionPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 5, 0));
+        actionPanel.setOpaque(false);
+
         mirrorCombo = new ComboBox<>();
         mirrorCombo.setFont(new Font(null, Font.PLAIN, 11));
         mirrorCombo.setPreferredSize(new Dimension(150, 28));
-        searchPanel.add(mirrorCombo, gbc);
+        actionPanel.add(mirrorCombo);
 
-        // 搜索按钮
-        gbc.gridx = 2;
-        gbc.gridy = 1;
         searchButton = new JButton("搜索");
         searchButton.setFont(new Font(null, Font.PLAIN, 11));
         searchButton.setPreferredSize(new Dimension(80, 28));
         searchButton.addActionListener(e -> performSearch());
-        searchPanel.add(searchButton, gbc);
+        actionPanel.add(searchButton);
 
-        // 第二行右侧填充
-        gbc.gridx = 3;
-        gbc.gridy = 1;
-        gbc.weightx = 1.0;
-        searchPanel.add(Box.createHorizontalGlue(), gbc);
+        searchPanel.add(actionPanel, gbc);
 
         return searchPanel;
     }
